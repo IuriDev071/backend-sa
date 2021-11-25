@@ -34,6 +34,10 @@ const Servico = database.define('servico', {
         allowNull: false,
         isNumeric: true
     },
+    valor_total: {
+        type: Sequelize.DECIMAL,
+        value: SUM(preco_mobra + preco_peca)
+    }
 })
 
 Servico.belongsTo(Usuario, {
