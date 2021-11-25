@@ -36,7 +36,15 @@ const Servico = database.define('servico', {
     },
     valor_total: {
         type: Sequelize.DECIMAL,
-        value: SUM(preco_mobra + preco_peca)
+        // value: SUM(preco_mobra + preco_peca)
+    },
+    created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+    },
+    updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
     }
 })
 

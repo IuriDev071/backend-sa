@@ -25,6 +25,14 @@ const Usuario = database.define('usuario', {
         min: 6,
         max: 16
     },
+    created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+    },
+    updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+    }
 })
 
 module.exports = Usuario;
