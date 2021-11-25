@@ -73,7 +73,7 @@ app.post('/servicos/', async (req, res) => {
         descricao: 'Problema no SSD',
         preco_mobra: '780',
         preco_peca: '230',
-        valor_total: preco_mobra + preco_peca,
+        // valor_total: preco_mobra + preco_peca,
         id: novoUsuario.id
     })
 
