@@ -32,11 +32,6 @@ app.get('/services/', async (req, res) => {
 
 })
 
-// Fazer um get ALL aqui
-// app.get('/', (req, res) => {
-//     res.json()
-// })
-
 // Create User
 app.post('/usuarios/', async (req, res) => {
 
@@ -47,17 +42,10 @@ app.post('/usuarios/', async (req, res) => {
         nome: 'Matiello',
         email: 'matiello@gmail.com',
         senha: 'oby123456',
+        id_servico: novoServico.id_servico
     })
 
     res.json(novoUsuario).status(201)
-
-    // Não mexe aqui ;)
-    // Validando cadastro do Usuario
-    // if (novoUsuario == usuarioCadastrado) {
-    //     res.json('Cadastro já existe').status(400)
-    // } else {
-    //     res.json(novoUsuario)
-    // }
 })
 
 
@@ -73,7 +61,6 @@ app.post('/servicos/', async (req, res) => {
         descricao: 'Problema no SSD',
         preco_mobra: '780',
         preco_peca: '230',
-        id: novoUsuario.id
     })
 
     res.json(novoServico).status(201)

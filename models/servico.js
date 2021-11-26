@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize')
 const database = require('../connect')
-const Usuario = require('./usuario')
 
 const Servico = database.define('servico', {
     id_servico: {
@@ -46,11 +45,6 @@ const Servico = database.define('servico', {
         type: Sequelize.DATE,
         allowNull: false,
     }
-})
-
-Servico.belongsTo(Usuario, {
-    constraint: true,
-    foreignKey: 'id'
 })
 
 module.exports = Servico;
