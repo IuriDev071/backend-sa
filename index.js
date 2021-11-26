@@ -32,22 +32,6 @@ app.get('/services/', async (req, res) => {
 
 })
 
-// Create User
-app.post('/usuarios/', async (req, res) => {
-
-    // Tirar o {force: true} depois dos testes;
-    await database.sync({ force: true });
-
-    const novoUsuario = await Usuario.create({
-        nome: 'Matiello',
-        email: 'matiello@gmail.com',
-        senha: 'oby123456',
-        id_servico: novoServico.id_servico
-    })
-
-    res.json(novoUsuario).status(201)
-})
-
 // Create Service
 app.post('/servicos/', async (req, res) => {
 
@@ -63,6 +47,21 @@ app.post('/servicos/', async (req, res) => {
     })
 
     res.json(novoServico).status(201)
+})
+
+// Create User
+app.post('/usuarios/', async (req, res) => {
+
+    await database.sync();
+
+    const novoUsuario = await Usuario.create({
+        nome: 'Matiello',
+        email: 'matiello@gmail.com',
+        senha: 'oby123456',
+        id_servico: novoServico.id_servico
+    })
+
+    res.json(novoUsuario).status(201)
 })
 
 var http = require('http')
