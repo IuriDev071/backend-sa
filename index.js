@@ -42,8 +42,8 @@ app.post('/servicos/', async (req, res) => {
         data_entrada: '2021-07-29',
         data_saida: '2021/07/31',
         descricao: 'Problema no SSD',
-        preco_mobra: '780',
-        preco_peca: '230',
+        preco_mobra: '780,00',
+        preco_peca: '230,00',
     })
 
     res.json(novoServico).status(201)
