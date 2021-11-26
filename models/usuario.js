@@ -25,11 +25,11 @@ const Usuario = database.define('usuario', {
         min: 6,
         max: 16
     },
-    created_at: {
+    createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
     },
-    updated_at: {
+    updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
     }
