@@ -43,13 +43,13 @@ app.post('/usuarios/', async (req, res) => {
     // Tirar o {force: true} depois dos testes;
     await database.sync({ force: true });
 
-    // const novoUsuario = await Usuario.create({
-    //     nome: 'Cardoso',
-    //     email: 'amon.ra@gmail.com',
-    //     senha: 'oby123456',
-    // })
+    const novoUsuario = await Usuario.create({
+        nome: 'Matiello',
+        email: 'matiello@gmail.com',
+        senha: 'oby123456',
+    })
 
-    res.json('Cadastrado com sucesso!').status(201)
+    res.json(novoUsuario).status(201)
 
     // Não mexe aqui ;)
     // Validando cadastro do Usuario
@@ -66,19 +66,19 @@ app.post('/servicos/', async (req, res) => {
 
     await database.sync()
 
-    // const novoServico = await Servico.create({
-    //     produto: 'Macbook Pro',
-    //     data_entrada: '2021-07-29',
-    //     data_saida: '2021/07/31',
-    //     descricao: 'Problema no SSD',
-    //     preco_mobra: '780',
-    //     preco_peca: '230',
-    //     // valor_total: preco_mobra + preco_peca,
-    //     id: novoUsuario.id
-    // })
+    const novoServico = await Servico.create({
+        produto: 'Macbook Pro',
+        data_entrada: '2021-07-29',
+        data_saida: '2021/07/31',
+        descricao: 'Problema no SSD',
+        preco_mobra: '780',
+        preco_peca: '230',
+        id: novoUsuario.id
+    })
 
-    res.json('Serviço cadastrado com sucesso!').status(201)
+    res.json(novoServico).status(201)
 })
+
 var http = require('http')
 
 var server = http.createServer(app)
