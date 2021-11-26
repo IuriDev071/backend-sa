@@ -48,7 +48,6 @@ app.post('/usuarios/', async (req, res) => {
     res.json(novoUsuario).status(201)
 })
 
-
 // Create Service
 app.post('/servicos/', async (req, res) => {
 
