@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const database = require('../connect')
+const Usuario = require('./usuario')
 
 const Servico = database.define('servico', {
     id_servico: {
