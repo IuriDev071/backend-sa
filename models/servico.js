@@ -5,21 +5,17 @@ const Servico = database.define('servico', {
     id_servico: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
-        allowNull: false,
         primaryKey: true
     },
     produto: {
         type: Sequelize.TEXT,
-        allowNull: false
     },
     data_entrada: {
         type: Sequelize.DATE,
-        allowNull: false,
         isNumeric: true
     },
     data_saida: {
         type: Sequelize.DATE,
-        allowNull: false,
         isNumeric: true
     },
     descricao: Sequelize.STRING,
@@ -30,7 +26,6 @@ const Servico = database.define('servico', {
     },
     preco_mobra: {
         type: Sequelize.DECIMAL,
-        allowNull: false,
         isNumeric: true
     },
     // valor_total: {
@@ -39,11 +34,9 @@ const Servico = database.define('servico', {
     // },
     createdAt: {
         type: Sequelize.DATE,
-        allowNull: false,
     },
     updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false,
     }
 })
 
