@@ -19,7 +19,7 @@ app.get('/users/', async (req, res) => {
     await database.sync();
 
     res.json(
-        await Usuario.findByPk(1)
+        await Usuario.findAll()
     ).status(200);
 
 })
@@ -30,7 +30,7 @@ app.get('/services/', async (req, res) => {
     await database.sync();
 
     res.json(
-        await Servico.findByPk(1)
+        await Servico.findAll()
     ).status(200);
 
 })
