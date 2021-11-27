@@ -18,8 +18,9 @@ app.get('/users/', async (req, res) => {
 
     await database.sync();
 
-    res.json(await Usuario.findAll())
-    res.status(200);
+    res.json(
+        await Usuario.findByPk(1)
+    ).status(200);
 
 })
 
@@ -28,22 +29,26 @@ app.get('/services/', async (req, res) => {
 
     await database.sync();
 
-    res.json(await Servico.findAll()).status(200);
+    res.json(
+        await Servico.findByPk(1)
+    ).status(200);
 
 })
 
 // Create Service
 app.post('/servicos/', async (req, res) => {
 
-    await database.sync({force: true})
+    await database.sync()
 
     const { produto, data_entrada,
         data_saida, descricao,
-        preco_peca, preco_mobra } = req.query;
+        preco_peca, preco_mobra } = await req.body;
 
-    const newService = new Servico(req.query);
+    const newService = new Servico(req.body);
 
-    res.json(req.query).status(201)
+    newService.save(req.body)
+
+    res.json(req.body).status(201)
 })
 
 // Create User
@@ -51,18 +56,18 @@ app.post('/usuarios/', async (req, res) => {
 
     await database.sync();
 
-    const { nome, email, senha } = req.query;
+    const { nome, email, senha, id_servico } = await req.body;
 
-    const newUser = new Usuario(req.query)
+    const newUser = new Usuario(req.body)
 
     // if (email != null && senha != null && nome != null) {
-        newUser.save(req.query)
-            .then((result) => {
-                res.json(result)
-            }).catch((error) => {
-                console.log(error)
-            })
-        return res.status(201, 'Created').json(req.query)
+    newUser.save(req.body)
+        .then((result) => {
+            res.json(result)
+        }).catch((error) => {
+            console.log(error)
+        })
+    return res.status(201, 'Created').json(req.body)
     // } else {
     //     return res.status(400, 'Bad request')
     // }
