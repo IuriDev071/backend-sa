@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize')
 const database = require('../connect')
-const Servico = require('./servico')
 
 const Usuario = database.define('usuario', {
     id: {
@@ -8,31 +7,15 @@ const Usuario = database.define('usuario', {
         autoIncrement: true,
         primaryKey: true
     },
-    nome: {
-        isUppercase: true, 
-        type: Sequelize.STRING,
-    },
-    email: {
-        isEmail: true,
-        type: Sequelize.STRING,
-    },
+    nome: Sequelize.STRING,
+    email: Sequelize.STRING,
     senha: {
-        isUppercase: true, 
         type: Sequelize.STRING,
         min: 6,
         max: 16
     },
-    createdAt: {
-        type: Sequelize.DATE,
-    },
-    updatedAt: {
-        type: Sequelize.DATE,
-    }
-})
-
-Usuario.belongsTo(Servico, {
-    constraint: true,
-    foreignKey: 'id_servico'
+    createdAt: Sequelize.DATE,
+    updatedAt: Sequelize.DATE,
 })
 
 module.exports = Usuario;

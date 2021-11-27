@@ -6,39 +6,24 @@ const Servico = database.define('servico', {
     id_servico: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        references: {
+            model: 'usuarios',
+            key: 'id',
+            constraint: true
+        }
     },
-    produto: {
-        type: Sequelize.TEXT,
-    },
-    data_entrada: {
-        type: Sequelize.DATE,
-        isNumeric: true
-    },
-    data_saida: {
-        type: Sequelize.DATE,
-        isNumeric: true
-    },
-    descricao: Sequelize.STRING,
+    produto: Sequelize.INTEGER,
+    data_entrada: Sequelize.DATE,
+    data_saida: Sequelize.DATE,
+    descricao: Sequelize.INTEGER,
     preco_peca: {
         type: Sequelize.DECIMAL,
         defaultValue: '0',
-        isNumeric: true
     },
-    preco_mobra: {
-        type: Sequelize.DECIMAL,
-        isNumeric: true
-    },
-    // valor_total: {
-    //     type: Sequelize.DECIMAL,
-    //     // value: SUM(preco_mobra + preco_peca)
-    // },
-    createdAt: {
-        type: Sequelize.DATE,
-    },
-    updatedAt: {
-        type: Sequelize.DATE,
-    }
+    preco_mobra: Sequelize.DECIMAL,
+    createdAt: Sequelize.DATE,
+    updatedAt: Sequelize.DATE,
 })
 
 module.exports = Servico;
