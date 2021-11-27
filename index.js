@@ -14,6 +14,7 @@ app.get('/', (req, res) => {
     res.json('Sequelize rodando').status(200)
 })
 
+// Read Users
 app.get('/users/', async (req, res) => {
 
     await database.sync();
@@ -22,7 +23,7 @@ app.get('/users/', async (req, res) => {
 
 })
 
-// Read for Services
+// Read Services
 app.get('/services/', async (req, res) => {
 
     await database.sync();
@@ -33,32 +34,42 @@ app.get('/services/', async (req, res) => {
 
 // Create Service
 app.post('/servicos/', async (req, res) => {
-
-    await database.sync()
+    await database.sync();
 
     const { produto, data_entrada,
         data_saida, descricao,
-        preco_peca, preco_mobra } = req.query;
+        preco_peca, preco_mobra } = req.body;
 
-    const newService = new Servico(req.query);
+    const novoServico = await Servico.create({
+        produto: req.body.produto,
+        data_entrada: req.body.data_entrada,
+        data_saida: req.body.data_saida,
+        descricao: req.body.descricao,
+        preco_peca: req.body.preco_peca,
+        preco_mobra: req.body.preco_mobra
+    })
 
-    newService.save(req.query)
+    novoServico.save(req.body)
 
-    res.json(req.query).status(201)
+    res.json(req.body).status(201)
 })
 
 // Create User
 app.post('/usuarios/', async (req, res) => {
-
     await database.sync();
 
-    const { nome, email, senha } = req.query;
+    const { nome, email, senha } = req.body;
 
-    const newUsuario = new Usuario(req.query);
+    const novoUsuario = await Usuario.create({
+        nome: req.body.nome,
+        email: req.body.email,
+        senha: req.body.senha,
+        id_servico: req.body.id_servico
+    })
 
-    newUsuario.save(req.query)
+    novoUsuario.save(req.body)
 
-    res.json(req.query).status(201)
+    res.json(req.body).status(201)
 })
 
 var http = require('http')
