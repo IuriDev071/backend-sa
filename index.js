@@ -35,18 +35,15 @@ app.get('/services/', async (req, res) => {
 // Create Service
 app.post('/servicos/', async (req, res) => {
 
-    await database.sync()
+    await database.sync({force: true})
 
-    const novoServico = await Servico.create({
-        produto: 'Macbook Pro',
-        data_entrada: '2021-07-29',
-        data_saida: '2021/07/31',
-        descricao: 'Problema no SSD',
-        preco_mobra: '780,00',
-        preco_peca: '230,00',
-    })
+    const { produto, data_entrada,
+        data_saida, descricao,
+        preco_peca, preco_mobra } = req.query;
 
-    res.json(novoServico).status(201)
+    const newService = new Servico(req.query);
+
+    res.json(req.query).status(201)
 })
 
 // Create User
@@ -54,14 +51,21 @@ app.post('/usuarios/', async (req, res) => {
 
     await database.sync();
 
-    const novoUsuario = await Usuario.create({
-        nome: 'Matiello',
-        email: 'matiello@gmail.com',
-        senha: 'oby123456',
-        id_servico: novoServico.id_servico
-    })
+    const { nome, email, senha } = req.query;
 
-    res.json(novoUsuario).status(201)
+    const newUser = new Usuario(req.query)
+
+    // if (email != null && senha != null && nome != null) {
+        newUser.save(req.query)
+            .then((result) => {
+                res.json(result)
+            }).catch((error) => {
+                console.log(error)
+            })
+        return res.status(201, 'Created').json(req.query)
+    // } else {
+    //     return res.status(400, 'Bad request')
+    // }
 })
 
 var http = require('http')
