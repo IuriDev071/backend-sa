@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize')
 const database = require('../connect')
-const Usuario = require('./usuario')
 
 const Servico = database.define('servico', {
     id_servico: {
@@ -9,19 +8,16 @@ const Servico = database.define('servico', {
         primaryKey: true,
         references: {
             model: 'usuarios',
-            key: 'id',
-            constraint: true
-        }
+            foreignKey: 'id',
+            constraints: true
+        },
     },
-    produto: Sequelize.INTEGER,
+    produto: Sequelize.STRING,
     data_entrada: Sequelize.DATE,
     data_saida: Sequelize.DATE,
-    descricao: Sequelize.INTEGER,
-    preco_peca: {
-        type: Sequelize.DECIMAL,
-        defaultValue: '0',
-    },
-    preco_mobra: Sequelize.DECIMAL,
+    descricao: Sequelize.STRING,
+    preco_peca: Sequelize.FLOAT,
+    preco_mobra: Sequelize.FLOAT,
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
 })

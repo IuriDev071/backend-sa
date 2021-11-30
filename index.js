@@ -11,7 +11,9 @@ const app = express()
 app.use(express.json())
 
 app.get('/', (req, res) => {
+
     res.json('Sequelize rodando').status(200)
+
 })
 
 // Read Users
@@ -40,18 +42,22 @@ app.post('/servicos/', async (req, res) => {
         data_saida, descricao,
         preco_peca, preco_mobra } = req.body;
 
-    const novoServico = await Servico.create({
-        produto: req.body.produto,
-        data_entrada: req.body.data_entrada,
-        data_saida: req.body.data_saida,
-        descricao: req.body.descricao,
-        preco_peca: req.body.preco_peca,
-        preco_mobra: req.body.preco_mobra
-    })
+    try {
+        const novoServico = await Servico.create({
+            produto,
+            data_entrada,
+            data_saida,
+            descricao,
+            preco_peca,
+            preco_mobra
+        })
 
-    novoServico.save(req.body)
+        novoServico.save(req.body)
 
-    res.json(req.body).status(201)
+        res.json(req.body).status(201)
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 // Create User
@@ -60,16 +66,19 @@ app.post('/usuarios/', async (req, res) => {
 
     const { nome, email, senha } = req.body;
 
-    const novoUsuario = await Usuario.create({
-        nome: req.body.nome,
-        email: req.body.email,
-        senha: req.body.senha,
-        id_servico: req.body.id_servico
-    })
+    try {
+        const novoUsuario = await Usuario.create({
+            nome,
+            email,
+            senha
+        })
 
-    novoUsuario.save(req.body)
+        novoUsuario.save(req.body)
 
-    res.json(req.body).status(201)
+        res.json(req.body).status(201)
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 var http = require('http')
