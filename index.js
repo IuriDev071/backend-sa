@@ -16,24 +16,6 @@ app.get('/', (req, res) => {
 
 })
 
-// Read Users
-app.get('/users/', async (req, res) => {
-
-    await database.sync();
-
-    res.json(await Usuario.findOne()).status(200);
-
-})
-
-// Read Services
-app.get('/services/', async (req, res) => {
-
-    await database.sync();
-
-    res.json(await Servico.findAll()).status(200);
-
-})
-
 // Create Service
 app.post('/servicos/', async (req, res) => {
     await database.sync();
@@ -113,6 +95,32 @@ app.post('/usuarios/login', async (req, res) => {
             estaLogado = 1;
             res.json("Logado com sucesso").status(202)
         }
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+// Update User
+app.put('/usuario/update', async (req, res) => {
+    await database.sync();
+
+    let usuarioAtualizado = 0;
+
+    const { nome } = req.body;
+
+    try {
+
+        usuarioAtualizado = 1;
+
+        const updateNome = await Usuario.findOne({
+            where: {
+                nome: req.body.nome
+            }
+        });
+
+        const nomeAtualizado = updateNome.save(req.body)
+
+        res.json(nomeAtualizado).status(201);
     } catch (error) {
         console.log(error)
     }
