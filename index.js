@@ -81,10 +81,10 @@ app.post('/usuarios/login', async (req, res) => {
     const { email, senha } = req.body;
 
     try {
-
         const user = await Usuario.findOne({
             where: {
-                email: req.body.email
+                email: email,
+                senha: senha
             }
         })
 
@@ -101,7 +101,7 @@ app.post('/usuarios/login', async (req, res) => {
 })
 
 // Update User
-app.put('/usuario/update', async (req, res) => {
+app.patch('/usuario/update', async (req, res) => {
     await database.sync();
 
     let usuarioAtualizado = 0;
@@ -109,18 +109,21 @@ app.put('/usuario/update', async (req, res) => {
     const { nome } = req.body;
 
     try {
+        if (nome != null) {
+            usuarioAtualizado = 1;
 
-        usuarioAtualizado = 1;
+            const updateNome = await Usuario.findOne({
+                where: {
+                    nome: nome
+                }
+            });
 
-        const updateNome = await Usuario.findOne({
-            where: {
-                nome: req.body.nome
+            if (updateNome != nome) { 
+                const nomeAtualizado = await updateNome.save(req.body)
+
+                res.json(nomeAtualizado).status(201);
             }
-        });
-
-        const nomeAtualizado = updateNome.save(req.body)
-
-        res.json(nomeAtualizado).status(201);
+        }
     } catch (error) {
         console.log(error)
     }
