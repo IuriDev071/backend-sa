@@ -93,7 +93,7 @@ app.post('/usuarios/login', async (req, res) => {
             res.json("Usuário não encontrado").status(404)
         } else {
             estaLogado = 1;
-            res.json("Logado com sucesso").status(202)
+            res.json("Logado com sucesso").status(200)
         }
     } catch (error) {
         console.log(error)
