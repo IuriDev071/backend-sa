@@ -4,7 +4,9 @@ const database = require('./connect')
 const Usuario = require('./Models/usuario')
 const Servico = require('./Models/servico')
 
-const PORT = process.env.PORT || 3005
+const PORT = process.env.NODE_ENV || 3005;
+
+// const config = require('./config.json')[env];
 
 const app = express()
 
@@ -109,7 +111,7 @@ app.patch('/usuario/update', async (req, res) => {
     const { nome } = req.body;
 
     try {
-        if (nome != null) {
+        if (!nome) {
             usuarioAtualizado = 1;
 
             const updateNome = await Usuario.findOne({
@@ -118,7 +120,7 @@ app.patch('/usuario/update', async (req, res) => {
                 }
             });
 
-            if (updateNome != nome) { 
+            if (!nome) { 
                 const nomeAtualizado = await updateNome.save(req.body)
 
                 res.json(nomeAtualizado).status(201);

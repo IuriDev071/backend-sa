@@ -1,0 +1,16 @@
+{
+    "local": {
+        "username": "root",
+        "password": "oby123456",
+        "host": "127.0.0.1",
+        "database": "bc_bsd",
+        "dialect": "mysql"
+    },
+    "production": {
+        "username": "b4247e74a59e5f",
+        "password": "d9304ddf",
+        "database": "heroku_69a6f03e280d282",
+        "host": "us-cdbr-east-04.cleardb.com",
+        "dialect": "mysql"
+    }
+}
