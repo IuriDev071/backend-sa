@@ -103,7 +103,7 @@ app.post('/usuarios/login', async (req, res) => {
 })
 
 // Update User
-app.patch('/usuario/update', async (req, res) => {
+app.put('/usuario/update', async (req, res) => {
     await database.sync();
 
     let usuarioAtualizado = 0;
