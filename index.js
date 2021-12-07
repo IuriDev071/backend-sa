@@ -158,7 +158,7 @@ app.delete('/usuarios/delete', async (req, res) => {
         res.json("Exclude ok").status(201);
     } catch (error) {
         console.log(error)
-        res.json("Erro").status(20000)
+        res.json("Erro").status(401)
     }
 });
     
