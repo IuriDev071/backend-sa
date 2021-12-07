@@ -113,31 +113,30 @@ app.post('/usuarios/login', async (req, res) => {
 })
 
 // Update User
-app.put('/usuario/update', async (req, res) => {
+app.put('/usuarios/update', async (req, res) => {
     await database.sync();
 
-    let usuarioAtualizado = 0;
-
-    const { nome } = req.body;
+    const { nome, id } = req.body;
 
     try {
-        if (!nome) {
-            usuarioAtualizado = 1;
 
-            const updateNome = await Usuario.findOne({
+            await Usuario.findOne({
                 where: {
-                    nome: nome
+                    id: id
                 }
-            });
+            }).then((Usuario) => {
+                if (Usuario) {
+                    Usuario.update({
+                        nome: nome
+                    })
+                }
+            })
 
-            if (!nome) { 
-                const nomeAtualizado = await updateNome.save(req.body)
+                res.json("Atualizado Ok").status(200);
 
-                res.json(nomeAtualizado).status(201);
-            }
-        }
     } catch (error) {
         console.log(error)
+        res.json("Erro").status(401)
     }
 })
 
