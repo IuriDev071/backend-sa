@@ -102,7 +102,7 @@ app.post('/usuarios/login', async (req, res) => {
                 }
             })
             obj = {
-                estaLogado,
+                flag: estaLogado,
                 data
             }
             res.json(obj).status(200)
