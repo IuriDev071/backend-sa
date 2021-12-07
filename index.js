@@ -95,18 +95,23 @@ app.post('/usuarios/login', async (req, res) => {
             res.json("Usuário não encontrado").status(404)
         } else {
             estaLogado = 1;
-            res.json("Logado com sucesso").status(200)
+            let obj = {};
+            const data = await Usuario.findOne({
+                where: {
+                    email: email
+                }
+            })
+            obj = {
+                estaLogado,
+                data
+            }
+            res.json(obj).status(200)
         }
     } catch (error) {
         console.log(error)
     }
 })
-app.get('/teste', async (req, res) => {
-    await database.sync();
-    const users = "dasdjaiodjiaosdaoij"
 
-    res.json(users)
-})
 // Update User
 app.put('/usuario/update', async (req, res) => {
     await database.sync();
@@ -140,11 +145,11 @@ app.put('/usuario/update', async (req, res) => {
 app.delete('/usuarios/delete', async (req, res) => {
     await database.sync()
  
- const nome = req.body;
+ const senha = req.body;
     
     const userDelete = Usuario.destroy({
         where: {
-              nome: nome
+              senha: senha
          }
      });
  
