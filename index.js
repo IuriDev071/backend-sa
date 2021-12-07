@@ -58,8 +58,8 @@ app.post('/usuarios/', async (req, res) => {
     try {
         if (email != null && nome != null && senha != null) {
             const novoUsuario = await Usuario.create({
-                nome,
                 email,
+                nome,
                 senha
             })
 
@@ -101,7 +101,12 @@ app.post('/usuarios/login', async (req, res) => {
         console.log(error)
     }
 })
+app.get('/teste', async (req, res) => {
+    await database.sync();
+    const users = "dasdjaiodjiaosdaoij"
 
+    res.json(users)
+})
 // Update User
 app.put('/usuario/update', async (req, res) => {
     await database.sync();
@@ -130,6 +135,21 @@ app.put('/usuario/update', async (req, res) => {
         console.log(error)
     }
 })
+
+//Delete user
+app.delete('/usuarios/delete', async (req, res) => {
+    await database.sync()
+ 
+ const nome = req.body;
+    
+    const userDelete = Usuario.destroy({
+        where: {
+              nome: nome
+         }
+     });
+ 
+    res.json(userDelete);
+ });
 
 var http = require('http')
 
