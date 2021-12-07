@@ -145,17 +145,23 @@ app.put('/usuario/update', async (req, res) => {
 app.delete('/usuarios/delete', async (req, res) => {
     await database.sync()
  
- const senha = req.body;
-    
-    const userDelete = Usuario.destroy({
-        where: {
-              senha: senha
-         }
-     });
- 
-    res.json(userDelete);
- });
+    const {id} = req.body;
 
+    try {
+        
+        await Usuario.destroy({
+            where: {
+                  id: id
+             }
+         });
+     
+        res.json("Exclude ok").status(201);
+    } catch (error) {
+        console.log(error)
+        res.json("Erro").status(20000)
+    }
+});
+    
 var http = require('http')
 
 var server = http.createServer(app)
