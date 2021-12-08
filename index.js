@@ -131,7 +131,7 @@ app.put('/usuarios/update', async (req, res) => {
                     })
                 }
             })
-
+            
                 res.json("Atualizado Ok").status(200);
 
     } catch (error) {
@@ -155,6 +155,27 @@ app.delete('/usuarios/delete', async (req, res) => {
          });
      
         res.json("Exclude ok").status(201);
+    } catch (error) {
+        console.log(error)
+        res.json("Erro").status(401)
+    }
+});
+
+//Get userdata
+app.get('/usuarios/get', async (req, res) => {
+    await database.sync()
+ 
+    const {id} = req.body;
+
+    try {
+        
+        const data = await Usuario.findOne({
+            where: {
+                  id: id
+             }
+         });
+     
+        res.json(data).status(201);
     } catch (error) {
         console.log(error)
         res.json("Erro").status(401)
