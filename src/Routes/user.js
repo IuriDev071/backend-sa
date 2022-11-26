@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const axios = require('axios')
 const User = require('../Schemas/mongo')
 
-mongoose.connect('mongodb+srv://Iuri:admin123@cluster0.ndtwj.mongodb.net/test')
+mongoose.connect('mongodb+srv://Iuri:oby123456@cluster0.ndtwj.mongodb.net/test')
 
 axios.create({ baseURL: 'http://localhost:3030/' })
 
